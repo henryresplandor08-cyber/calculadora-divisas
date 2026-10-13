@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Convertidor de Monedas en Tiempo Real | USD, EUR, VES y más</title>
+<meta name="description" content="Convierte dólares, euros, bolívares, pesos y más de 150 monedas con tasas de cambio actualizadas. Gratis y rápido.">
+
+<!-- ADSENSE: reemplaza ca-pub-XXXXXXXXXXXXXXXX por tu ID de editor cuando te aprueben -->
+<!--
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+-->
+
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--tx:#162033;--mut:#667085;--ac:#2563eb;--bd:#e3e8f0}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1420;--card:#172033;--tx:#e8edf6;--mut:#93a0b8;--ac:#5b8cff;--bd:#27324a}}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--tx);line-height:1.6}
+header{text-align:center;padding:28px 16px 8px}
+h1{margin:0;font-size:1.7rem}
+header p{color:var(--mut);margin:6px 0 0}
+main{max-width:720px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:20px;margin-bottom:16px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:520px){.row{grid-template-columns:1fr}}
+label{font-size:.8rem;color:var(--mut);display:block;margin-bottom:4px}
+input,select{width:100%;padding:12px;font-size:1.05rem;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--tx)}
+.swap{display:block;margin:12px auto;background:none;border:1px solid var(--bd);color:var(--ac);border-radius:999px;padding:6px 16px;cursor:pointer;font-size:.9rem}
+.result{text-align:center;margin-top:12px}
+.result .big{font-size:2rem;font-weight:700;color:var(--ac);word-break:break-word}
+.result small{color:var(--mut)}
+.ad{min-height:100px;text-align:center;color:var(--mut);font-size:.75rem;margin:16px 0}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+td,th{padding:8px 6px;border-bottom:1px solid var(--bd);text-align:left}
+h2{font-size:1.15rem;margin-top:0}
+footer{text-align:center;color:var(--mut);font-size:.82rem;padding:20px 16px 40px}
+footer a{color:var(--ac)}
+#privacidad{display:none}
+#privacidad:target{display:block}
+</style>
+</head>
+<body>
+<header>
+  <h1>💱 Convertidor de Monedas</h1>
+  <p>Tasas de cambio actualizadas · Gratis · Sin registro</p>
+</header>
+
+<main>
+  <div class="card">
+    <div class="row">
+      <div><label for="amt">Cantidad</label><input id="amt" type="number" inputmode="decimal" value="1" min="0" step="any"></div>
+      <div><label for="from">De</label><select id="from"></select></div>
+    </div>
+    <button class="swap" id="swap" type="button">⇅ Invertir</button>
+    <div class="row">
+      <div><label for="to">A</label><select id="to"></select></div>
+      <div><label>Resultado</label><input id="out" readonly></div>
+    </div>
+    <div class="result">
+      <div class="big" id="big">—</div>
+      <small id="meta">Cargando tasas…</small>
+    </div>
+  </div>
+
+  <!-- ANUNCIO 1 (arriba) -->
+  <div class="ad">
+    <!-- Pega aquí tu bloque de anuncio de AdSense:
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1111111111" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script> -->
+    Publicidad
+  </div>
+
+  <div class="card">
+    <h2>Conversiones rápidas</h2>
+    <table id="quick"></table>
+  </div>
+
+  <div class="card">
+    <h2>¿Cómo funciona este convertidor?</h2>
+    <p>Este convertidor usa tasas de cambio de referencia obtenidas de una fuente pública y las actualiza varias veces al día. Selecciona la moneda de origen, la de destino e introduce la cantidad: el resultado se calcula al instante.</p>
+    <p>Las tasas son informativas y pueden diferir de las que aplican bancos, casas de cambio o mercados paralelos. Antes de realizar operaciones, confirma la tasa con tu entidad.</p>
+  </div>
+
+  <!-- ANUNCIO 2 (abajo) -->
+  <div class="ad">
+    <!-- Segundo bloque de AdSense aquí -->
+    Publicidad
+  </div>
+
+  <div class="card" id="privacidad">
+    <h2>Política de privacidad</h2>
+    <p>Este sitio no solicita ni almacena datos personales. Usamos Google AdSense para mostrar anuncios; Google y sus socios pueden usar cookies para personalizar la publicidad según tus visitas a este y otros sitios. Puedes gestionar tus preferencias en <a href="https://adssettings.google.com" rel="noopener">Configuración de anuncios de Google</a>.</p>
+    <p>Las tasas de cambio se consultan a un servicio público de terceros. Contacto: <a href="mailto:henryresplandor08@gmail.com">henryresplandor08@gmail.com</a></p>
+  </div>
+</main>
+
+<footer>
+  <a href="#privacidad">Política de privacidad</a> ·
+  <a href="mailto:henryresplandor08@gmail.com">Contacto</a><br>
+  Las tasas son solo de referencia.
+</footer>
+
+<script>
+const NAMES={USD:"Dólar estadounidense",EUR:"Euro",VES:"Bolívar venezolano",COP:"Peso colombiano",MXN:"Peso mexicano",ARS:"Peso argentino",BRL:"Real brasileño",CLP:"Peso chileno",PEN:"Sol peruano",GBP:"Libra esterlina",CAD:"Dólar canadiense",JPY:"Yen japonés",CNY:"Yuan chino",CHF:"Franco suizo",DOP:"Peso dominicano",UYU:"Peso uruguayo",BOB:"Boliviano",PYG:"Guaraní",PAB:"Balboa",CRC:"Colón costarricense"};
+// Tasas de respaldo (aprox., base USD) por si falla la conexión
+let rates={USD:1,EUR:.92,VES:40,COP:4000,MXN:18,ARS:900,BRL:5.4,CLP:950,PEN:3.75,GBP:.78,CAD:1.36,JPY:150,CNY:7.2,CHF:.88,DOP:60,UYU:40,BOB:6.9,PYG:7500,PAB:1,CRC:520};
+let updated="tasas de respaldo (sin conexión)";
+const $=id=>document.getElementById(id);
+const amt=$("amt"),from=$("from"),to=$("to");
+
+function fill(){
+  const codes=Object.keys(rates).sort((a,b)=>(NAMES[a]?0:1)-(NAMES[b]?0:1)||a.localeCompare(b));
+  const keepF=from.value||"USD",keepT=to.value||"VES";
+  [from,to].forEach(s=>s.innerHTML=codes.map(c=>`<option value="${c}">${c}${NAMES[c]?" – "+NAMES[c]:""}</option>`).join(""));
+  from.value=codes.includes(keepF)?keepF:"USD";
+  to.value=codes.includes(keepT)?keepT:"EUR";
+}
+const conv=(v,f,t)=>v/rates[f]*rates[t];
+const fmt=(n,d=2)=>n.toLocaleString("es-VE",{maximumFractionDigits:n<1?6:d});
+
+function calc(){
+  const v=parseFloat(amt.value)||0,f=from.value,t=to.value;
+  if(!rates[f]||!rates[t])return;
+  const r=conv(v,f,t);
+  $("out").value=fmt(r,4);
+  $("big").textContent=`${fmt(v)} ${f} = ${fmt(r,4)} ${t}`;
+  $("meta").textContent=`1 ${f} = ${fmt(conv(1,f,t),6)} ${t} · ${updated}`;
+  $("quick").innerHTML="<tr><th>"+f+"</th><th>"+t+"</th></tr>"+[1,5,10,50,100,500,1000].map(n=>`<tr><td>${n} ${f}</td><td>${fmt(conv(n,f,t),4)} ${t}</td></tr>`).join("");
+}
+["input","change"].forEach(e=>[amt,from,to].forEach(el=>el.addEventListener(e,calc)));
+$("swap").onclick=()=>{[from.value,to.value]=[to.value,from.value];calc()};
+
+async function load(){
+  try{
+    const r=await fetch("https://open.er-api.com/v6/latest/USD");
+    const d=await r.json();
+    if(d.result==="success"){rates=d.rates;updated="actualizado: "+new Date(d.time_last_update_unix*1000).toLocaleString("es-VE")}
+  }catch(e){}
+  fill();calc();
+}
+fill();calc();load();
+</script>
+</body>
+</html>
