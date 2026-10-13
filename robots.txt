@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://henryresplandor08-cyber.github.io/calculadora-divisas/sitemap.xml

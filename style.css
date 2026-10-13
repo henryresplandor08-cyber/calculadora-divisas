@@ -1,0 +1,27 @@
+:root{--bg:#f5f7fb;--card:#fff;--tx:#162033;--mut:#667085;--ac:#2563eb;--bd:#e3e8f0}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1420;--card:#172033;--tx:#e8edf6;--mut:#93a0b8;--ac:#5b8cff;--bd:#27324a}}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--tx);line-height:1.65}
+header{text-align:center;padding:26px 16px 6px}
+header a.logo{color:var(--tx);text-decoration:none;font-weight:700;font-size:1.05rem}
+h1{margin:10px 0 0;font-size:1.65rem;line-height:1.25}
+header p{color:var(--mut);margin:6px 0 0}
+main{max-width:740px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:20px;margin-bottom:16px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:520px){.row{grid-template-columns:1fr}}
+label{font-size:.8rem;color:var(--mut);display:block;margin-bottom:4px}
+input,select{width:100%;padding:12px;font-size:1.05rem;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--tx)}
+.swap{display:block;margin:12px auto;background:none;border:1px solid var(--bd);color:var(--ac);border-radius:999px;padding:6px 16px;cursor:pointer;font-size:.9rem}
+.result{text-align:center;margin-top:12px}
+.result .big{font-size:1.9rem;font-weight:700;color:var(--ac);word-break:break-word}
+.result small{color:var(--mut)}
+.ad{min-height:100px;text-align:center;color:var(--mut);font-size:.75rem;margin:16px 0}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+td,th{padding:8px 6px;border-bottom:1px solid var(--bd);text-align:left}
+h2{font-size:1.15rem;margin-top:0}
+h3{font-size:1rem;margin-bottom:4px}
+a{color:var(--ac)}
+.links{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.links a{border:1px solid var(--bd);border-radius:10px;padding:8px 10px;text-decoration:none;font-size:.92rem;background:var(--bg)}
+footer{text-align:center;color:var(--mut);font-size:.82rem;padding:20px 16px 40px}
